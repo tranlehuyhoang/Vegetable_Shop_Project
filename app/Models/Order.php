@@ -16,4 +16,8 @@ class Order extends Model
         'payment',
 
     ];
+    public static function getAllOrders()
+    {
+        return Order::orderByDesc('id')->get();
+    }
 }

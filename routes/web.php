@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\MediaController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\client\CartController;
 use App\Http\Controllers\client\HomeController;
+use App\Http\Controllers\client\InvoiceController;
 use App\Http\Controllers\client\OrderController;
 use App\Http\Controllers\client\ProductDetailController;
 use App\Http\Controllers\client\RegistrationController;
@@ -43,9 +44,14 @@ Route::controller(CartController::class)->middleware('auth')->group(function () 
 Route::controller(OrderController::class)->middleware('auth')->group(function () {
     Route::get('/checkout', 'index');
     Route::post('/checkout/create', 'create');
+    Route::post('/checkout/re_payment', 're_payment');
 });
 Route::controller(UserDashboardController::class)->middleware('auth')->group(function () {
     Route::get('/user', 'index');
+});
+Route::controller(InvoiceController::class)->middleware('auth')->group(function () {
+    Route::get('/invoice/{cart_id}', 'index');
+    Route::get('/order-success/{cart_id}', 'order');
 });
 
 Route::get('/404', function () {
