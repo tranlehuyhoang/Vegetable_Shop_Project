@@ -14,7 +14,9 @@ use App\Http\Controllers\client\ReviewController;
 use App\Http\Controllers\client\SendMailController;
 use App\Http\Controllers\client\SessionsController;
 use App\Http\Controllers\client\UserDashboardController;
+use App\Http\Controllers\client\WishlistController;
 use App\Models\Category;
+use App\Models\Wishlist;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +65,12 @@ Route::controller(SendMailController::class)->middleware('auth')->group(function
     Route::get('/send', 'index');
 });
 
+Route::controller(WishlistController::class)->middleware('auth')->group(function () {
+    Route::get('/wishlist', 'index');
+    Route::post('/wishlist/create', 'store');
+    Route::get('/wishlist/{wishlist}/delete', 'destroy');
+});
+
 Route::get('/404', function () {
     return view('client.404');
 });
@@ -102,9 +110,7 @@ Route::get('/seller-detail', function () {
 Route::get('/seller-list', function () {
     return view('client.seller-list');
 });
-Route::get('/wishlist', function () {
-    return view('client.wishlist');
-});
+
 Route::controller(RegistrationController::class)->middleware('guest')->group(function () {
     Route::get('register', 'create');
     Route::post('register', 'store');

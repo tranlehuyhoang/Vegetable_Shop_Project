@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Fastkart">
     <meta name="keywords" content="Fastkart">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="Fastkart">
     <link rel="icon" href="{{ asset('assets_client/images/favicon/4.png') }}" type="image/x-icon">
     <title>On-demand last-mile delivery</title>
@@ -311,7 +312,8 @@
                                         </a>
                                     </li>
                                     <li class="right-side">
-                                        <a href="wishlist.php" class="btn p-0 position-relative header-wishlist">
+                                        <a href="{{ url('wishlist', []) }}"
+                                            class="btn p-0 position-relative header-wishlist">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -389,7 +391,8 @@
                                                 </div>
 
                                                 <div class="button-group">
-                                                    <a href="cart.php" class="btn btn-sm cart-button">View Cart</a>
+                                                    <a href="{{ url('cart', []) }}"
+                                                        class="btn btn-sm cart-button">View Cart</a>
                                                     <a href="checkout.php"
                                                         class="btn btn-sm cart-button theme-bg-color
                                                     text-white">Checkout</a>
@@ -1110,14 +1113,14 @@
             </li>
 
             <li>
-                <a href="wishlist.php" class="notifi-wishlist">
+                <a href="{{ url('wishlist', []) }}" class="notifi-wishlist">
                     <i class="iconly-Heart icli"></i>
                     <span>My Wish</span>
                 </a>
             </li>
 
             <li>
-                <a href="cart.php">
+                <a href="{{ url('cart', []) }}">
                     <i class="iconly-Bag-2 icli fly-cate"></i>
                     <span>Cart</span>
                 </a>

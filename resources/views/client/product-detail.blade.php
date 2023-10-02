@@ -303,10 +303,51 @@
                                 </form>
 
                                 <div class="buy-box">
-                                    <a href="wishlist.html">
+                                    <!-- Trong tệp blade hoặc trang HTML của bạn -->
+                                    <a class="wishlist" href="#" data-product-id="{{ $product->id }}">
                                         <i data-feather="heart"></i>
                                         <span>Add To Wishlist</span>
                                     </a>
+
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                    <script>
+                                        $(document).ready(function() {
+                                                    $('.wishlist').click(function(event) {
+                                                                event.preventDefault();
+                                                                var productId = $(this).data('product-id');
+                                                                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                                                                $.ajax({
+                                                                            url: '/wishlist/create',
+                                                                            type: 'POST',
+                                                                            data: {
+                                                                                product: productId,
+                                                                                _token: csrfToken
+                                                                            },
+                                                                            success: function(response) {
+                                                                                    // Xử lý thành công
+                                                                                    @if (session('success'))
+                                                                                        <
+                                                                                        script src = "https://cdn.jsdelivr.net/npm/sweetalert2@11" >
+                                    </script>
+
+                                    <script>
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Thành công!',
+                                            text: "{{ session('success') }}",
+                                        });
+                                    </script>
+                                    @endif
+                                    },
+                                    error: function(xhr) {
+                                    // Xử lý lỗi
+                                    console.log(xhr.responseText);
+                                    }
+                                    });
+                                    });
+                                    });
+                                    </script>
 
                                     <a href="compare.html">
                                         <i data-feather="shuffle"></i>
@@ -1787,6 +1828,17 @@
             </div>
         </div>
     </section>
+    @if (session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại!',
+                text: "{{ session('error') }}",
+            });
+        </script>
+    @endif
+
     <!-- Releted Product Section End -->
 @endsection
 <!-- index body end -->
