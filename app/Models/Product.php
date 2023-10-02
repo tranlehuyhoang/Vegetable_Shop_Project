@@ -22,4 +22,8 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'category', 'id');
     }
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'product', 'id')->orderBy('id', 'desc');
+    }
 }

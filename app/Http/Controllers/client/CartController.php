@@ -43,12 +43,24 @@ class CartController extends Controller
         $cart->quantity = $request->input('quantity_cart');
         $cart->product = $request->input('product');
 
+        if (Cart::where('user', auth()->user()->id)->where('product', $request->input('product'))->where('status', 0)->exists()) {
 
+            return redirect()->back();
+        } else {
+            $cart->save();
+            return redirect('cart');
+        }
         // Lưu hình ảnh vào thư mục public/images (cần tạo thư mục nếu chưa có)
-        $cart->save();
 
 
         // Trả về kết quả thành công hoặc thông báo lỗi
-        return redirect('cart');
+
+    }
+    public function delete(Cart $cart)
+    {
+
+        // dd($cart);
+        // Xóa mục trong giỏ hàng
+        $cart->delete();
     }
 }

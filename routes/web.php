@@ -10,6 +10,7 @@ use App\Http\Controllers\client\InvoiceController;
 use App\Http\Controllers\client\OrderController;
 use App\Http\Controllers\client\ProductDetailController;
 use App\Http\Controllers\client\RegistrationController;
+use App\Http\Controllers\client\ReviewController;
 use App\Http\Controllers\client\SessionsController;
 use App\Http\Controllers\client\UserDashboardController;
 use App\Models\Category;
@@ -39,6 +40,7 @@ Route::controller(ProductDetailController::class)->group(function () {
 Route::controller(CartController::class)->middleware('auth')->group(function () {
     Route::get('/cart', 'index');
     Route::post('/cart/create', 'add');
+    Route::get('/cart/{cart}/delete', 'delete');
 });
 
 Route::controller(OrderController::class)->middleware('auth')->group(function () {
@@ -52,6 +54,9 @@ Route::controller(UserDashboardController::class)->middleware('auth')->group(fun
 Route::controller(InvoiceController::class)->middleware('auth')->group(function () {
     Route::get('/invoice/{cart_id}', 'index');
     Route::get('/order-success/{cart_id}', 'order');
+});
+Route::controller(ReviewController::class)->middleware('auth')->group(function () {
+    Route::post('/review/create', 'create');
 });
 
 Route::get('/404', function () {
@@ -107,7 +112,7 @@ Route::controller(SessionsController::class)->group(function () {
 });
 
 Route::controller(AdminLoginController::class)->group(function () {
-    Route::get('admin/login', 'index')->middleware('guest');
+    Route::get('admin/login', 'index')->middleware('guest')->name('admin.login');
     Route::post('admin/login', 'login');
     Route::get('admin/logout', 'destroy');
 });

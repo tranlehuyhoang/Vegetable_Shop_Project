@@ -633,51 +633,93 @@
                                                 </div>
 
                                                 <div class="col-xl-6">
-                                                    <div class="review-title">
-                                                        <h4 class="fw-500">Add a review</h4>
-                                                    </div>
-
-                                                    <div class="row g-4">
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating theme-form-floating">
-                                                                <input type="text" class="form-control" id="name"
-                                                                    placeholder="Name">
-                                                                <label for="name">Your Name</label>
+                                                    <form action="{{ url('review/create', []) }}" method="post">
+                                                        @csrf
+                                                        <div class="review-title">
+                                                            <h4 class="fw-500">Add a review</h4>
+                                                            <div class="ratingss">
+                                                                <input type="radio" id="star5" name="rating"
+                                                                    value="5">
+                                                                <label for="star5"></label>
+                                                                <input type="radio" id="star4" name="rating"
+                                                                    value="4">
+                                                                <label for="star4"></label>
+                                                                <input type="radio" id="star3" name="rating"
+                                                                    value="3">
+                                                                <label for="star3"></label>
+                                                                <input type="radio" id="star2" name="rating"
+                                                                    value="2">
+                                                                <label for="star2"></label>
+                                                                <input type="radio" id="star1" checked
+                                                                    name="rating" value="1">
+                                                                <label for="star1"></label>
                                                             </div>
+                                                            <style>
+                                                                .ratingss {
+                                                                    display: inline-block;
+                                                                }
+
+                                                                .ratingss input {
+                                                                    display: none;
+                                                                }
+
+                                                                .ratingss label {
+                                                                    float: right;
+                                                                    cursor: pointer;
+                                                                    color: gray;
+                                                                }
+
+                                                                .ratingss label:before {
+                                                                    content: '\2605';
+                                                                    font-size: 24px;
+                                                                }
+
+                                                                .ratingss input:checked~label {
+                                                                    color: gold;
+                                                                }
+                                                            </style>
                                                         </div>
 
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating theme-form-floating">
-                                                                <input type="email" class="form-control" id="email"
-                                                                    placeholder="Email Address">
-                                                                <label for="email">Email Address</label>
+                                                        <div class="row g-4">
+                                                            <div class="col-md-6">
+                                                                <div class="form-floating theme-form-floating">
+                                                                    <input type="text" class="form-control"
+                                                                        id="name"
+                                                                        placeholder="{{ auth()->user()->name }}" disabled>
+                                                                    <label
+                                                                        for="name">{{ auth()->user()->name }}</label>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating theme-form-floating">
-                                                                <input type="url" class="form-control" id="website"
-                                                                    placeholder="Website">
-                                                                <label for="website">Website</label>
+                                                            <div class="col-md-6">
+                                                                <div class="form-floating theme-form-floating">
+                                                                    <input type="email" class="form-control"
+                                                                        id="email"
+                                                                        placeholder="{{ auth()->user()->email }}"
+                                                                        disabled>
+                                                                    <label
+                                                                        for="email">{{ auth()->user()->email }}</label>
+                                                                </div>
                                                             </div>
-                                                        </div>
 
-                                                        <div class="col-md-6">
-                                                            <div class="form-floating theme-form-floating">
-                                                                <input type="url" class="form-control" id="review1"
-                                                                    placeholder="Give your review a title">
-                                                                <label for="review1">Review Title</label>
-                                                            </div>
-                                                        </div>
+                                                            <input type="number" name="product" style="display: none"
+                                                                value="{{ $product->id }}">
 
-                                                        <div class="col-12">
-                                                            <div class="form-floating theme-form-floating">
-                                                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 150px"></textarea>
-                                                                <label for="floatingTextarea2">Write Your
-                                                                    Comment</label>
+
+
+                                                            <div class="col-12">
+                                                                <div class="form-floating theme-form-floating">
+                                                                    <textarea name="description" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                                                                        style="height: 150px"></textarea>
+                                                                    <label for="floatingTextarea2">Write Your
+                                                                        Comment</label>
+                                                                </div>
                                                             </div>
+                                                            <button type="submit"
+                                                                class="btn mt-sm-4 btn-2 theme-bg-color text-white mend-auto btn-2-animation">Post
+                                                            </button>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
 
                                                 <div class="col-12">
@@ -687,342 +729,235 @@
 
                                                     <div class="review-people">
                                                         <ul class="review-list">
-                                                            <li>
-                                                                <div class="people-box">
-                                                                    <div>
-                                                                        <div class="people-image">
-                                                                            <img src="{{ asset('assets_client/images/review/1.jpg') }}"
-                                                                                class="img-fluid blur-up lazyload"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="people-comment">
-                                                                        <a class="name"
-                                                                            href="javascript:void(0)">Tracey</a>
-                                                                        <div class="date-time">
-                                                                            <h6 class="text-content">14 Jan, 2022 at
-                                                                                12.58 AM</h6>
-
-                                                                            <div class="product-rating">
-                                                                                <ul class="rating">
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"></i>
-                                                                                    </li>
-                                                                                </ul>
+                                                            @foreach ($product->reviews as $review)
+                                                                <li>
+                                                                    <div class="people-box">
+                                                                        <div>
+                                                                            <div class="people-image">
+                                                                                <img src="{{ asset('assets_client/images/review/1.jpg') }}"
+                                                                                    class="img-fluid blur-up lazyload"
+                                                                                    alt="">
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="reply">
-                                                                            <p>Icing cookie carrot cake chocolate cake
-                                                                                sugar plum jelly-o danish. Dragée dragée
-                                                                                shortbread tootsie roll croissant muffin
-                                                                                cake I love gummi bears. Candy canes ice
-                                                                                cream caramels
-                                                                                tiramisu marshmallow cake shortbread
-                                                                                candy canes cookie.<a
-                                                                                    href="javascript:void(0)">Reply</a>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
+                                                                        <div class="people-comment">
+                                                                            <a class="name"
+                                                                                href="javascript:void(0)">{{ $review->users->name }}</a>
+                                                                            <div class="date-time">
+                                                                                <h6 class="text-content">14 Jan, 2022 at
+                                                                                    12.58 AM</h6>
 
-                                                            <li>
-                                                                <div class="people-box">
-                                                                    <div>
-                                                                        <div class="people-image">
-                                                                            <img src="{{ asset('assets_client/images/review/2.jpg') }}"
-                                                                                class="img-fluid blur-up lazyload"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
+                                                                                <div class="product-rating">
+                                                                                    <ul class="rating">
 
-                                                                    <div class="people-comment">
-                                                                        <a class="name"
-                                                                            href="javascript:void(0)">Olivia</a>
-                                                                        <div class="date-time">
-                                                                            <h6 class="text-content">01 May, 2022 at
-                                                                                08.31 AM</h6>
-                                                                            <div class="product-rating">
-                                                                                <ul class="rating">
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"></i>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
+                                                                                        <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                                                        <li>
+                                                                                            <?php if ($i <= $review->rate): ?>
+                                                                                        <li>
+                                                                                            <i data-feather="star"
+                                                                                                class="fill"></i>
+                                                                                        </li>
 
-                                                                        <div class="reply">
-                                                                            <p>Tootsie roll cake danish halvah powder
-                                                                                Tootsie roll candy marshmallow cookie
-                                                                                brownie apple pie pudding brownie
-                                                                                chocolate bar. Jujubes gummi bears I
-                                                                                love powder danish oat cake
-                                                                                tart croissant.
-                                                                                <a href="javascript:void(0)">Reply</a>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
 
-                                                            <li>
-                                                                <div class="people-box">
-                                                                    <div>
-                                                                        <div class="people-image">
-                                                                            <img src="{{ asset('assets_client/images/review/3.jpg') }}"
-                                                                                class="img-fluid blur-up lazyload"
-                                                                                alt="">
-                                                                        </div>
-                                                                    </div>
+                                                                                        <?php else: ?>
+                                                                                        <li>
+                                                                                            <i data-feather="star"></i>
+                                                                                        </li>
+                                                                                        <?php endif; ?>
+                                                                </li>
+                                                                <?php endfor; ?>
 
-                                                                    <div class="people-comment">
-                                                                        <a class="name"
-                                                                            href="javascript:void(0)">Gabrielle</a>
-                                                                        <div class="date-time">
-                                                                            <h6 class="text-content">21 May, 2022 at
-                                                                                05.52 PM</h6>
-
-                                                                            <div class="product-rating">
-                                                                                <ul class="rating">
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"
-                                                                                            class="fill"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"></i>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <i data-feather="star"></i>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="reply">
-                                                                            <p>Biscuit chupa chups gummies powder I love
-                                                                                sweet pudding jelly beans. Lemon drops
-                                                                                marzipan apple pie gingerbread macaroon
-                                                                                croissant cotton candy pastry wafer.
-                                                                                Carrot cake halvah
-                                                                                I love tart caramels pudding icing
-                                                                                chocolate gummi bears. Gummi bears
-                                                                                danish cotton candy muffin marzipan
-                                                                                caramels awesome feel. <a
-                                                                                    href="javascript:void(0)">Reply</a>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
+
+                                                <div class="reply">
+                                                    <p>{{ $review->description }}<a href="javascript:void(0)">Reply</a>
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                        </li>
+                                        @endforeach
+                                        <li>
+                                            <div class="people-box">
+                                                <div>
+                                                    <div class="people-image">
+                                                        <img src="{{ asset('assets_client/images/review/2.jpg') }}"
+                                                            class="img-fluid blur-up lazyloaded" alt="">
+                                                    </div>
+                                                </div>
 
-                <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block wow fadeInUp">
-                    <div class="right-sidebar-box">
-                        <div class="vendor-box">
-                            <div class="verndor-contain">
-                                <div class="vendor-image">
-                                    <img src="{{ asset('assets_client/images/product/vendor.png') }}"
-                                        class="blur-up lazyload" alt="">
-                                </div>
+                                                <div class="people-comment">
+                                                    <a class="name" href="javascript:void(0)">Olivia</a>
+                                                    <div class="date-time">
+                                                        <h6 class="text-content">01 May, 2022 at
+                                                            08.31 AM</h6>
+                                                        <div class="product-rating">
+                                                            <ul class="rating">
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star fill">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star fill">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star fill">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
-                                <div class="vendor-name">
-                                    <h5 class="fw-500">Noodles Co.</h5>
+                                                    <div class="reply">
+                                                        <p>Tootsie roll cake danish halvah powder
+                                                            Tootsie roll candy marshmallow cookie
+                                                            brownie apple pie pudding brownie
+                                                            chocolate bar. Jujubes gummi bears I
+                                                            love powder danish oat cake tart
+                                                            croissant.<a href="javascript:void(0)">Reply</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="people-box">
+                                                <div>
+                                                    <div class="people-image">
+                                                        <img src="{{ asset('assets_client/images/review/3.jpg') }}"
+                                                            class="img-fluid blur-up lazyloaded" alt="">
+                                                    </div>
+                                                </div>
 
-                                    <div class="product-rating mt-1">
-                                        <ul class="rating">
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star" class="fill"></i>
-                                            </li>
-                                            <li>
-                                                <i data-feather="star"></i>
-                                            </li>
+                                                <div class="people-comment">
+                                                    <a class="name" href="javascript:void(0)">Gabrielle</a>
+                                                    <div class="date-time">
+                                                        <h6 class="text-content">21 May, 2022 at
+                                                            05.52 PM</h6>
+
+                                                        <div class="product-rating">
+                                                            <ul class="rating">
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star fill">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star fill">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star fill">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star fill">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-star">
+                                                                        <polygon
+                                                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                                        </polygon>
+                                                                    </svg>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="reply">
+                                                        <p>Biscuit chupa chups gummies powder I love
+                                                            sweet pudding jelly beans. Lemon drops
+                                                            marzipan apple pie gingerbread macaroon
+                                                            croissant cotton candy pastry wafer.
+                                                            Carrot cake halvah I love tart caramels
+                                                            pudding icing chocolate gummi bears.
+                                                            Gummi bears danish cotton candy muffin
+                                                            marzipan caramels awesome feel. <a
+                                                                href="javascript:void(0)">Reply</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
                                         </ul>
-                                        <span>(36 Reviews)</span>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <p class="vendor-detail">Noodles & Company is an American fast-casual restaurant that offers
-                                international and American noodle dishes and pasta.</p>
-
-                            <div class="vendor-list">
-                                <ul>
-                                    <li>
-                                        <div class="address-contact">
-                                            <i data-feather="map-pin"></i>
-                                            <h5>Address: <span class="text-content">1288 Franklin Avenue</span></h5>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="address-contact">
-                                            <i data-feather="headphones"></i>
-                                            <h5>Contact Seller: <span class="text-content">(+1)-123-456-789</span></h5>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Trending Product -->
-                        <div class="pt-25">
-                            <div class="category-menu">
-                                <h3>Trending Products</h3>
-
-                                <ul class="product-list product-right-sidebar border-0 p-0">
-                                    <li>
-                                        <div class="offer-product">
-                                            <a href="product-left-thumbnail.html" class="offer-image">
-                                                <img src="{{ asset('assets_client/images/vegetable/product/23.png') }}"
-                                                    class="img-fluid blur-up lazyload" alt="">
-                                            </a>
-
-                                            <div class="offer-detail">
-                                                <div>
-                                                    <a href="product-left-thumbnail.html">
-                                                        <h6 class="name">Meatigo Premium Goat Curry</h6>
-                                                    </a>
-                                                    <span>450 G</span>
-                                                    <h6 class="price theme-color">$ 70.00</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="offer-product">
-                                            <a href="product-left-thumbnail.html" class="offer-image">
-                                                <img src="{{ asset('assets_client/images/vegetable/product/24.png') }}"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-
-                                            <div class="offer-detail">
-                                                <div>
-                                                    <a href="product-left-thumbnail.html">
-                                                        <h6 class="name">Dates Medjoul Premium Imported</h6>
-                                                    </a>
-                                                    <span>450 G</span>
-                                                    <h6 class="price theme-color">$ 40.00</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="offer-product">
-                                            <a href="product-left-thumbnail.html" class="offer-image">
-                                                <img src="{{ asset('assets_client/images/vegetable/product/25.png') }}"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-
-                                            <div class="offer-detail">
-                                                <div>
-                                                    <a href="product-left-thumbnail.html">
-                                                        <h6 class="name">Good Life Walnut Kernels</h6>
-                                                    </a>
-                                                    <span>200 G</span>
-                                                    <h6 class="price theme-color">$ 52.00</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li class="mb-0">
-                                        <div class="offer-product">
-                                            <a href="product-left-thumbnail.html" class="offer-image">
-                                                <img src="{{ asset('assets_client/images/vegetable/product/26.png') }}"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-
-                                            <div class="offer-detail">
-                                                <div>
-                                                    <a href="product-left-thumbnail.html">
-                                                        <h6 class="name">Apple Red Premium Imported</h6>
-                                                    </a>
-                                                    <span>1 KG</span>
-                                                    <h6 class="price theme-color">$ 80.00</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Banner Section -->
-                        <div class="ratio_156 pt-25">
-                            <div class="home-contain">
-                                <img src="{{ asset('assets_client/images/vegetable/banner/8.jpg') }}"
-                                    class="bg-img blur-up lazyload" alt="">
-                                <div class="home-detail p-top-left home-p-medium">
-                                    <div>
-                                        <h6 class="text-yellow home-banner">Seafood</h6>
-                                        <h3 class="text-uppercase fw-normal"><span
-                                                class="theme-color fw-bold">Freshes</span> Products</h3>
-                                        <h3 class="fw-light">every hour</h3>
-                                        <button onclick="location.href = 'shop-left-sidebar.html';"
-                                            class="btn btn-animation btn-md fw-bold mend-auto">Shop Now <i
-                                                class="fa-solid fa-arrow-right icon"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -1030,6 +965,174 @@
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="col-xxl-3 col-xl-4 col-lg-5 d-none d-lg-block wow fadeInUp">
+            <div class="right-sidebar-box">
+                <div class="vendor-box">
+                    <div class="verndor-contain">
+                        <div class="vendor-image">
+                            <img src="{{ asset('assets_client/images/product/vendor.png') }}" class="blur-up lazyload"
+                                alt="">
+                        </div>
+
+                        <div class="vendor-name">
+                            <h5 class="fw-500">Noodles Co.</h5>
+
+                            <div class="product-rating mt-1">
+                                <ul class="rating">
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star" class="fill"></i>
+                                    </li>
+                                    <li>
+                                        <i data-feather="star"></i>
+                                    </li>
+                                </ul>
+                                <span>(36 Reviews)</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <p class="vendor-detail">Noodles & Company is an American fast-casual restaurant that offers
+                        international and American noodle dishes and pasta.</p>
+
+                    <div class="vendor-list">
+                        <ul>
+                            <li>
+                                <div class="address-contact">
+                                    <i data-feather="map-pin"></i>
+                                    <h5>Address: <span class="text-content">1288 Franklin Avenue</span></h5>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="address-contact">
+                                    <i data-feather="headphones"></i>
+                                    <h5>Contact Seller: <span class="text-content">(+1)-123-456-789</span></h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Trending Product -->
+                <div class="pt-25">
+                    <div class="category-menu">
+                        <h3>Trending Products</h3>
+
+                        <ul class="product-list product-right-sidebar border-0 p-0">
+                            <li>
+                                <div class="offer-product">
+                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                        <img src="{{ asset('assets_client/images/vegetable/product/23.png') }}"
+                                            class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+
+                                    <div class="offer-detail">
+                                        <div>
+                                            <a href="product-left-thumbnail.html">
+                                                <h6 class="name">Meatigo Premium Goat Curry</h6>
+                                            </a>
+                                            <span>450 G</span>
+                                            <h6 class="price theme-color">$ 70.00</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="offer-product">
+                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                        <img src="{{ asset('assets_client/images/vegetable/product/24.png') }}"
+                                            class="blur-up lazyload" alt="">
+                                    </a>
+
+                                    <div class="offer-detail">
+                                        <div>
+                                            <a href="product-left-thumbnail.html">
+                                                <h6 class="name">Dates Medjoul Premium Imported</h6>
+                                            </a>
+                                            <span>450 G</span>
+                                            <h6 class="price theme-color">$ 40.00</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="offer-product">
+                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                        <img src="{{ asset('assets_client/images/vegetable/product/25.png') }}"
+                                            class="blur-up lazyload" alt="">
+                                    </a>
+
+                                    <div class="offer-detail">
+                                        <div>
+                                            <a href="product-left-thumbnail.html">
+                                                <h6 class="name">Good Life Walnut Kernels</h6>
+                                            </a>
+                                            <span>200 G</span>
+                                            <h6 class="price theme-color">$ 52.00</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="mb-0">
+                                <div class="offer-product">
+                                    <a href="product-left-thumbnail.html" class="offer-image">
+                                        <img src="{{ asset('assets_client/images/vegetable/product/26.png') }}"
+                                            class="blur-up lazyload" alt="">
+                                    </a>
+
+                                    <div class="offer-detail">
+                                        <div>
+                                            <a href="product-left-thumbnail.html">
+                                                <h6 class="name">Apple Red Premium Imported</h6>
+                                            </a>
+                                            <span>1 KG</span>
+                                            <h6 class="price theme-color">$ 80.00</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Banner Section -->
+                <div class="ratio_156 pt-25">
+                    <div class="home-contain">
+                        <img src="{{ asset('assets_client/images/vegetable/banner/8.jpg') }}"
+                            class="bg-img blur-up lazyload" alt="">
+                        <div class="home-detail p-top-left home-p-medium">
+                            <div>
+                                <h6 class="text-yellow home-banner">Seafood</h6>
+                                <h3 class="text-uppercase fw-normal"><span class="theme-color fw-bold">Freshes</span>
+                                    Products</h3>
+                                <h3 class="fw-light">every hour</h3>
+                                <button onclick="location.href = 'shop-left-sidebar.html';"
+                                    class="btn btn-animation btn-md fw-bold mend-auto">Shop Now <i
+                                        class="fa-solid fa-arrow-right icon"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
         </div>
     </section>
     <!-- Product Left Sidebar End -->

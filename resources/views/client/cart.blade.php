@@ -99,7 +99,34 @@
                                             <td class="save-remove">
                                                 <h4 class="table-title text-content">Action</h4>
                                                 <a class="save notifi-wishlist" href="javascript:void(0)">Save for later</a>
-                                                <a class="remove close_button" href="javascript:void(0)">Remove</a>
+                                                <a class="remove close_button" style="cursor: pointer"
+                                                    onclick="deleteCart({{ $cart->id }})">Remove</a>
+
+                                                <script>
+                                                    function deleteCart(cartId) {
+                                                        event.preventDefault();
+
+                                                        // Gửi yêu cầu Ajax để xóa giỏ hàng dựa trên ID
+                                                        fetch('/cart/' + cartId + '/delete', {
+                                                                method: 'GET',
+                                                                headers: {
+                                                                    'Content-Type': 'application/json',
+                                                                    'X-CSRF-TOKEN': '{{ csrf_token() }}' // Thêm mã CSRF token (nếu cần thiết)
+                                                                }
+                                                            })
+                                                            .then(function(response) {
+                                                                if (response.ok) {
+                                                                    console.log('Cart with ID', cartId, 'deleted successfully.');
+                                                                    // Thực hiện các hành động cần thiết sau khi xóa giỏ hàng thành công
+                                                                } else {
+                                                                    console.error('Failed to delete cart with ID', cartId);
+                                                                }
+                                                            })
+                                                            .catch(function(error) {
+                                                                console.error('Error occurred while deleting cart with ID', cartId, ':', error);
+                                                            });
+                                                    }
+                                                </script>
                                             </td>
                                         </tr>
                                     @endforeach
