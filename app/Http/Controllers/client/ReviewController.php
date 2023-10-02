@@ -35,9 +35,9 @@ class ReviewController extends Controller
 
             // Lưu đối tượng Review vào cơ sở dữ liệu
             $review->save();
-            return redirect()->back()->with('success', 'Review added successfully');
+            return redirect()->back()->with('success', 'Thêm đánh giá thành công !');
         } else {
-            return redirect()->back()->with('success', 'Review not successfully');
+            return redirect()->back()->with('error', 'Mua sản phẩm để đánh giá');
         }
 
 

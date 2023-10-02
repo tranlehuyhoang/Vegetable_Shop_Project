@@ -33,7 +33,7 @@ class UserDashboardController extends Controller
                     ->where('code', $vnp_TxnRef)
                     ->orderByDesc('id')
                     ->update(['payment' => 1]);
-                return redirect('invoice/' . $vnp_TxnRef . '');
+                return redirect('invoice/' . $vnp_TxnRef . '')->with('success', 'Thanh toán thành công !');
             } else {
                 return redirect('checkout');
             }

@@ -684,7 +684,7 @@
                                         </a>
 
                                         <h5 class="price theme-color">
-                                            ${{ $product->price }}</del>
+                                            ${{ $product->price }}.00</del>
                                         </h5>
 
 
@@ -776,7 +776,7 @@
                                                 <h5 class="name">{{ $product->name }}</h5>
                                             </a>
                                             <h5 class="price theme-color">
-                                                ${{ $product->price }}</del>
+                                                ${{ $product->price }}.00</del>
                                             </h5>
                                             {{-- <h5 class="price theme-color">$70.21<del>$65.25</del></h5> --}}
                                             <div class="price-qty">

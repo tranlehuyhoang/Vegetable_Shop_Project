@@ -2,6 +2,16 @@
 <html lang="en">
 
 <head>
+    @if (session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: "{{ session('success') }}",
+            });
+        </script>
+    @endif
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -241,8 +251,9 @@
                                                 <tr>
                                                     <td
                                                         style="padding: 28px 0;border-bottom: 1px solid rgba(217, 217, 217, 0.5);">
-                                                        <img src="{{ asset($cart->products->image) }}" alt=""
-                                                            style="height: 80px">
+                                                        <a href="{{ url('product/' . $cart->products->id . '', []) }}">
+                                                            <img src="{{ asset($cart->products->image) }}"
+                                                                alt="" style="height: 80px"></a>
                                                     </td>
                                                     <td
                                                         style="padding: 28px 0;border-bottom: 1px solid rgba(217, 217, 217, 0.5);">

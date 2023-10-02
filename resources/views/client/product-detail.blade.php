@@ -2,6 +2,26 @@
 
 <!-- index body start -->
 @section('content')
+    @if (session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: "{{ session('success') }}",
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Thất bại!',
+                text: "{{ session('error') }}",
+            });
+        </script>
+    @endif
     <!-- Breadcrumb Section Start -->
     <section class="breadscrumb-section pt-0">
         <div class="container-fluid-lg">
@@ -143,7 +163,7 @@
                                 {{-- <h6 class="offer-top">30% Off</h6> --}}
                                 <h2 class="name">{{ $product->name }}</h2>
                                 <div class="price-rating">
-                                    <h3 class="theme-color price">${{ $product->price }}</h3>
+                                    <h3 class="theme-color price">${{ $product->price }}.00</h3>
                                     <div class="product-rating custom-rate">
                                         <ul class="rating">
                                             <li>
