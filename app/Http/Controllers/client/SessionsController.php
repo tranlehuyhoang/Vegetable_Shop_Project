@@ -15,12 +15,10 @@ class SessionsController extends Controller
     public function store()
     {
         if (auth()->attempt(request(['email', 'password'])) == false) {
-            return back()->withErrors([
-                'message' => 'The email or password is incorrect, please try again'
-            ]);
+            return redirect('login')->with('error', 'Sai tài khoản hoặc mật khẩu !');
         }
 
-        return redirect()->to('/');
+        return redirect()->to('/')->with('success', 'Đăng nhập thành công !');
     }
 
     public function destroy()

@@ -3810,6 +3810,16 @@
         </div>
     </section>
     <!-- Newsletter Section End -->
+    @if (session('success'))
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: "{{ session('success') }}",
+            });
+        </script>
+    @endif
 
     <!-- Footer Start -->
 @endsection

@@ -7,7 +7,8 @@ use App\Models\Cart;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Mail\InvoiOrderMailable;
+use Illuminate\Support\Facades\Mail; // Import the Mail class
 class InvoiceController extends Controller
 {
     public function index(int $code_order)
@@ -26,7 +27,8 @@ class InvoiceController extends Controller
             ->orderByDesc('id')
             ->get();
 
-
+        $code_order;
+        Mail::to($user->email)->send(new InvoiOrderMailable($code_order, $order, $carts, $user->email));
 
 
         return view('client.invoice', compact('user', 'carts', 'order'));

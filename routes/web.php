@@ -11,6 +11,7 @@ use App\Http\Controllers\client\OrderController;
 use App\Http\Controllers\client\ProductDetailController;
 use App\Http\Controllers\client\RegistrationController;
 use App\Http\Controllers\client\ReviewController;
+use App\Http\Controllers\client\SendMailController;
 use App\Http\Controllers\client\SessionsController;
 use App\Http\Controllers\client\UserDashboardController;
 use App\Models\Category;
@@ -57,6 +58,9 @@ Route::controller(InvoiceController::class)->middleware('auth')->group(function 
 });
 Route::controller(ReviewController::class)->middleware('auth')->group(function () {
     Route::post('/review/create', 'create');
+});
+Route::controller(SendMailController::class)->middleware('auth')->group(function () {
+    Route::get('/send', 'index');
 });
 
 Route::get('/404', function () {
@@ -116,6 +120,7 @@ Route::controller(AdminLoginController::class)->group(function () {
     Route::post('admin/login', 'login');
     Route::get('admin/logout', 'destroy');
 });
+
 
 
 
